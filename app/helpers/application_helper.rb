@@ -3,4 +3,11 @@ module ApplicationHelper
     base_title = "Ruby on Rails Tutorial Sample App"
     page_title.empty? ? base_title : "#{page_title} | #{base_title}"
   end
+
+  def gravatar_for user, options = {size: 80}
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    size = options[:size]
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    image_tag gravatar_url, alt: user.name, class: "gravatar"
+  end
 end
